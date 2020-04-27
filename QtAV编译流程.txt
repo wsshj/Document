@@ -1,0 +1,24 @@
+1.下载 ffmpeg-4.2.1-win64-dev 和 ffmpeg-4.2.1-win64-shared
+
+2.将  ffmpeg-4.2.1-win64-dev\include 下文件复制到 Qt目录中include下  D:\Qt\Qt5.12.5\5.12.5\msvc2015_64\include
+
+3.将  ffmpeg-4.2.1-win64-dev\lib 下文件复制到 Qt目录中lib下  D:\Qt\Qt5.12.5\5.12.5\msvc2015_64\lib
+
+4.运行QtAV.pro，release下执行qmake，构建
+
+5.查看编译生成文件夹下 lib_win_x86_64 中是否生合成动态，静态库
+
+6.执行编译生成文件夹下 sdk_install.bat 动态库自动导入至Qt目录下
+
+注意：
+1.自建项目pro中添加
+QT       += av
+QT       += avwidgets
+LIBS     += -lD:\Qt\Qt5.12.5\5.12.5\msvc2015_64\lib\QtAV1
+LIBS     += -lD:\Qt\Qt5.12.5\5.12.5\msvc2015_64\lib\QtAVWidgets1
+
+2.执行文件时将 QtAV 和 ffmpeg（ffmpeg-4.2.1-win64-shared\bin）所需动态库复制到可执行文件目录
+
+发布：
+在Qt编译环境控制台下找到要发布的exe所在文件夹，执行“windeployqt 文件名.exe”
+例如:windeployqt G:\fb\my_QtAV_player.exe
