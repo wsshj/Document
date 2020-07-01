@@ -1,0 +1,13 @@
+1.安装打包工具：
+	pip install pyinstaller
+
+2.在要打包的目录下执行 cmd
+
+3.打包文件：
+	pyinstaller -F main.py
+	将文件 main.py 和他调用的文件一并打包为一个 main.exe 文件
+
+	pyinstaller -D main.py
+	将文件 main.py 和他调用的文件一并打包为多个文件，包括 main.exe 文件，.dll 文件等
+
+4.打开 dist 找到可执行文件

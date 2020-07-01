@@ -1,0 +1,43 @@
+1.创建环境：
+	conda create -n NAME python=3.6
+	创建一个环境名为 NAME 的环境，并为其安装3.6版本的python
+
+2.查看已有环境：
+	conda info -e
+	conda info --envs
+	conda env list
+	三者一样的效果
+
+3.进入已有环境：
+	conda activate NAME
+	进入名为 NAME 的环境
+
+4.为环境安装软件：
+	conda install python=3.7
+	安装python3.7
+
+	conda install numpy
+	安装最新的 numpy
+
+5.更新软件：
+	conda update conda
+	更新 conda 
+
+	conda update numpy
+	更新 numpy
+
+6.查看已安装软件：
+	conda list
+	查看当前环境中的软件
+
+7.退出环境：
+	conda deactivate
+	退出当前环境
+
+8.移除环境：
+	conda remove -n NAME --all
+	删除名为 NAME 的环境
+
+9.复制环境：
+	conda create -n NAME --clone OTHER_NAME
+	创建 NAME 环境，其状态复制 OTHER_NAME 的环境

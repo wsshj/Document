@@ -1,0 +1,60 @@
+1.pygame
+	pygame.mixer.music.load()  ——  载入一个音乐文件用于播放
+	pygame.mixer.music.play()  ——  开始播放音乐流
+	pygame.mixer.music.rewind()  ——  重新开始播放音乐
+	pygame.mixer.music.stop()  ——  结束音乐播放
+	pygame.mixer.music.pause()  ——  暂停音乐播放
+	pygame.mixer.music.unpause()  ——  恢复音乐播放
+	pygame.mixer.music.fadeout()  ——  淡出的效果结束音乐播放
+	pygame.mixer.music.set_volume()  ——  设置音量
+	pygame.mixer.music.get_volume()  ——  获取音量
+	pygame.mixer.music.get_busy()  ——  检查是否正在播放音乐
+	pygame.mixer.music.set_pos()  ——  设置播放的位置
+	pygame.mixer.music.get_pos()  ——  获取播放的位置
+	pygame.mixer.music.queue()  ——  将一个音乐文件放入队列中，并排在当前播放的音乐之后
+	pygame.mixer.music.set_endevent()  ——  当播放结束时发出一个事件
+	pygame.mixer.music.get_endevent()  ——  获取播放结束时发送的事件
+	Pygame 中播放音乐的模块和 pygame.mixer 模块是密切联系的。使用音乐模块去控制在调音器上的音乐播放。
+
+example：
+	import time
+	import pygame
+	import os
+
+	file_path = 'G:\\pydub\\tm.flac'
+	pygame.mixer.init()  #初始化音频
+	track = pygame.mixer_music.load(file_path)  #音频载入
+	pygame.mixer_music.play()  #播放
+	while pygame.mixer.music.get_busy():
+	    time.sleep(1)
+	pygame.mixer_music.stop()
+
+
+2.PlaySound：
+	PlaySound是Windows用于播放音乐的API函数(方法)。
+
+
+3.pyaudio
+	1.在 github 上下载 pyaudio 支持 python3.7 的版本，https://github.com/intxcc/pyaudio_portaudio/releases
+	2.pip install PyAudio-0.2.11-cp37-cp37m-win_amd64.whl
+
+
+4.pydub
+	1.下载 ffmpeg-4.2.2-win64-static
+	2.为 ffmpeg 配置环境变量
+	3.pip install pydub
+	4.在 github 上下载 pyaudio 支持 python3.7 的版本，https://github.com/intxcc/pyaudio_portaudio/releases
+	5.pip install PyAudio-0.2.11-cp37-cp37m-win_amd64.whl
+	6.编写代码
+		from pydub import AudioSegment
+		from pydub.playback import play
+
+		song = AudioSegment.from_file('G:\\pydub\\tm.flac', 'flac')
+		play(song)
+	7.可以播放了
+	8.但是play会阻塞，要自己写线程播放
+
+	simpleaudio
+
+
+5.python-mpv

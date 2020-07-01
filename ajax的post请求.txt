@@ -1,0 +1,18 @@
+跨域请求：
+随便打开一个网站，注意是https还是http
+F12打开控制台
+在控制台中粘贴下面语句即可实现跨域请求
+
+
+$.ajax({
+        type: "POST",
+        url: 'http://172.16.3.162:8000/api/Area/Point/',
+        
+        data: {'Type':'read', 'AreaCode':1},
+        success: function (data) {
+            console.log('read162', data)
+        },
+        error: function (err) {
+            console.log('error', err);
+        }
+    });

@@ -1,0 +1,26 @@
+import ConfigParser
+config = ConfigParser.ConfigParser()
+
+一、读取配置文件（config.ini）
+read(filename)：读取文件内容
+sections()：获取所有section，返回list
+options(section)：获取该section所有options，返回list
+items(section)：获取options键值对，返回list
+get(section,option)：获取section的option值，返回string；getint，getboolean，getfloat同理
+
+ 二、写入配置文件（config.ini）
+write(filename)：将config对象写入ini格式的文件
+add_section(section)：添加新的section
+set(section,option,value)：给section中option赋值（新增，或者是修改）
+remove_setcion(section)：删除某section
+remove_option(section,option)：删除该section下的option
+
+
+配置文件内容如下：
+[db]
+dbuser = test
+dbpassword = test
+dbport = 3308
+ 
+[emain]
+emailto = ***qq.com

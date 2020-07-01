@@ -1,0 +1,12 @@
+1.创建一个叫做 yourname 的 session：
+	screen -S yourname
+
+2.列出当前所有的 session:
+	screen -ls
+
+3.回到 yourname 这个 session：
+	screen -r yourname 
+
+4.还可以使用 ctrl + a 快捷键操作:
+	C-a ?  ->  显示所有绑定信息
+	通过这个可以查看其它快捷键 
