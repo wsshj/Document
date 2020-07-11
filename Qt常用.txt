@@ -1,0 +1,97 @@
+中文路码问题解决办法：
+在 .pro 文件中添加：
+msvc:QMAKE_CXXFLAGS += -execution-charset:utf-8
+
+
+QString转int
+直接调用toInt()函数
+例：
+QString str("100");
+int tmp = str.toInt();
+或者：
+bool ok;
+QString str("100");
+int tmp = str.toInt(&ok);
+注：ok表示转换是否成功，成功则ok为true，失败则ok为false。
+
+
+int转QString
+QString::number();
+例：
+int tmp = 100;
+QString str = QString::number(tmp);
+
+
+遍历文件夹的两种方法：
+1.利用目录迭代器 QDirIterator：
+void traverseFolder(QString path)
+{
+    //判断路径是否存在
+    QDir dir(path);
+    if(!dir.exists())
+    {
+        return;
+    }
+
+    //获取所选文件类型过滤器
+    QStringList filters;
+    filters<<QString("*.flac")<<QString("*.wav")<<QString("*.mp3");
+
+    //定义迭代器并设置过滤器
+    QDirIterator dir_iterator(path,
+        filters,
+        QDir::Files | QDir::NoSymLinks,
+        QDirIterator::Subdirectories);
+    QStringList string_list;
+    while(dir_iterator.hasNext())
+    {
+        dir_iterator.next();
+        QFileInfo file_info = dir_iterator.fileInfo();
+        QString absolute_file_path = file_info.absoluteFilePath();
+        string_list.append(absolute_file_path);
+    }
+}
+
+2.利用递归函数
+QStringList string_list;
+void traverseFolder(QString path)
+{
+    QDir dir(path);
+    if(!dir.exists())
+    {
+        return;
+    }
+    dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoSymLinks);
+    dir.setSorting(QDir::DirsFirst);
+    QFileInfoList list = dir.entryInfoList();
+    int i = 0;
+    bool is_dir;
+    do
+    {
+        QFileInfo file_info = list.at(i);
+        if(file_info.fileName() == "." | file_info.fileName() == "..")
+        {
+            i++;
+            continue;
+        }
+
+        is_dir = file_info.isDir();
+        if(is_dir)
+        {
+            //进行递归
+            addSubFolderImages(file_info.filePath());
+        }
+        else
+        {
+            //获取文件后缀并获取所选包含类型，若存在包含类型且后缀相同，则添加
+            QString suffix =  file_info.suffix();
+            if(QString::compare(suffix, QString("png"), Qt::CaseInsensitive) == 0)
+            {
+                QString absolute_file_path = file_info.absoluteFilePath();
+                string_list.append(absolute_file_path);
+            }
+        }
+        i++;
+    }
+    while(i<list.size());
+}

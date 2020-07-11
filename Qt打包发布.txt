@@ -1,0 +1,10 @@
+1. qtcreator 中 release 编译工程
+
+2.找到编译生成的 .exe 文件
+
+3.将 .exe 复制到空的新目录下
+
+4.在该目录下调出控制台 cmd
+
+5.执行“windeployqt 文件名.exe”
+例如:windeployqt G:\fb\my_QtAV_player.exe

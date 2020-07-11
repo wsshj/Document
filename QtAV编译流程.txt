@@ -18,7 +18,3 @@ LIBS     += -lD:\Qt\Qt5.12.5\5.12.5\msvc2015_64\lib\QtAV1
 LIBS     += -lD:\Qt\Qt5.12.5\5.12.5\msvc2015_64\lib\QtAVWidgets1
 
 2.执行文件时将 QtAV 和 ffmpeg（ffmpeg-4.2.1-win64-shared\bin）所需动态库复制到可执行文件目录
-
-发布：
-在Qt编译环境控制台下找到要发布的exe所在文件夹，执行“windeployqt 文件名.exe”
-例如:windeployqt G:\fb\my_QtAV_player.exe
