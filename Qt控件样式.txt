@@ -1,0 +1,77 @@
+QSlider样式
+
+// 调用
+m_pPlaySlider->setStyleSheet("QSlider::groove:horizontal{height: 4px; border-radius: 2px;}"
+                             "QSlider::sub-page:horizontal{height: 4px; border-radius: 2px; background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.181818 rgba(32, 234, 230, 255), stop:0.471591 rgba(62, 168, 255, 255), stop:0.761364 rgba(35, 41, 214, 255));}"
+                             "QSlider::add-page:horizontal{height: 4px; border-radius: 2px; background-color: rgb(200, 200, 200);}"
+                             "QSlider::handle:horizontal{width: 8px; margin-top: -2px; margin-bottom: -2px; border-radius: 4px; background-color: rgb(35, 41, 214);}"
+                             "QSlider::handle:horizontal:hover {width: 10px; margin-top: -3px; margin-bottom: -3px; border-radius: 5px; background-color: rgb(66, 132, 198);}"
+                             );
+
+// slider基本设置
+QSlider::groove:horizontal {
+	border: 1px solid #4A708B; 	// 边框颜色
+	background: #C0C0C0;		// 背景色		
+	height: 5px;				// 高度
+	border-radius: 1px;			// 左右边界半径
+	padding-left:-1px;			// 按钮左边范围
+	padding-right:-1px;			// 按钮右边范围
+}
+
+// 按钮经过的部分（左边部分）
+QSlider::sub-page:horizontal {
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4);
+	border: 1px solid #4A708B;
+	height: 10px;
+	border-radius: 2px;
+}
+
+// 按钮未经过的部分（右边部分）
+QSlider::add-page:horizontal {
+	background: #575757;
+	border: 0px solid #777;
+	height: 10px;
+	border-radius: 2px;
+}
+
+// 按钮样式
+QSlider::handle:horizontal 
+{
+    background: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, 
+    stop:0.6 #45ADED, stop:0.778409 rgba(255, 255, 255, 255));
+
+    width: 11px;				// 按钮宽度
+    margin-top: -3px;			// 上部边缘，0的话和基本设置相同，-3则向上超出3个像素
+    margin-bottom: -3px;		// 下部边缘，0的话和基本设置相同，-3则向下超出3个像素
+    border-radius: 5px;			// 按钮边缘半径，如果半径是宽高的 1/2，则会绘制成圆形 
+}
+
+// 鼠标移上后的按钮样式
+QSlider::handle:horizontal:hover {
+    background: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0.6 #2A8BDA, 
+    stop:0.778409 rgba(255, 255, 255, 255));
+
+    width: 11px;
+    margin-top: -3px;
+    margin-bottom: -3px;
+    border-radius: 5px;
+}
+
+// 不可用时，按钮经过的部分（左边部分）
+QSlider::sub-page:horizontal:disabled {
+	background: #00009C;
+	border-color: #999;
+}
+
+// 不可用时，按钮未经过的部分（右边部分）
+QSlider::add-page:horizontal:disabled {
+	background: #eee;
+	border-color: #999;
+}
+
+// 不可用时，按钮样式
+QSlider::handle:horizontal:disabled {
+	background: #eee;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+}

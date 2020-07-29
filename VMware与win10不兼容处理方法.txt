@@ -1,0 +1,4 @@
+1.以管理员身份运行 cmd
+
+2.执行：
+bcdedit /set hypervisorlaunchtype off

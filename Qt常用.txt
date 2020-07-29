@@ -95,3 +95,30 @@ void traverseFolder(QString path)
     }
     while(i<list.size());
 }
+
+
+QT的setwindowflags的属性总结：
+	setWindowFlags(Qt::CustomizeWindowHint）;//设置窗口标题栏自定义
+
+	setWindowFlags（Qt::WindowMinimizeButtonHint）;//设置窗口的标题栏只有最小化的按钮
+
+	setWindowFlags( Qt::WindowCloseButtonHint ）;//设置窗口的标题栏只有关闭的按钮
+
+	setWindowFlags（Qt::WindowStaysOnTopHint);//设置窗体一直置顶，并且不会抢焦点
+
+	setWindowFlags(this->windowFlags()）;//设置窗口为QT的默认属性
+
+	setWindowFlags（Qt::FramelessWindowHint)）;//设置窗体无边框，不可拖动拖拽拉伸
+
+	setWindowModality(Qt::WindowModal); //设置窗体为模态
+
+	setWindowModality(Qt::WindowStaysOnTopHint); //设置窗体位于所有界面之上
+
+创建画布填充背景色:
+	QPalette pal(palette());
+	pal.setColor(QPalette::Background, QColor(255,255,255,170));
+	setAutoFillBackground(true);
+	setPalette(pal);
+
+设置控件为，无边框，背景白色，透明度0.5(0 —— 1):
+    m_pPlayListBar->setStyleSheet("border:none;background-color: rgba(255, 255, 255, 0.5);");
