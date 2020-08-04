@@ -1,3 +1,8 @@
+定义：
+	Conda 是为 Python 程序创建的，适用于 Linux，OS X 和Windows，也可以打包和分发其他软件 [1]  。
+	最流行的 Python 环境管理工具
+	装 Anaconda 自带
+
 1.创建环境：
 	conda create -n NAME python=3.6
 	创建一个环境名为 NAME 的环境，并为其安装3.6版本的python
