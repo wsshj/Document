@@ -1,0 +1,45 @@
+1.下载pjssip，https://www.pjsip.org/
+
+2.结合文档进行配置生成，https://trac.pjsip.org/repos/wiki/Getting-Started
+
+3.windows下编译生成过程中需要注意的：
+1）pjproject-vs14.sln 用 vs2015 打开，这边14的意思应该是“平台工具集：Visual Studio 2015 (v140)”，不知道 vs2017 设置后可不可以生成
+2）设置 pjsua 为 “启动项目”，在 “解决方案资源管理器” 中右键然后选 “设为启动项目”
+3）设置 “解决方案配置” 和 “解决方案平台”，选 debug 和 release 就好，其他动态，静态啥的不知道什么意思。平台 x64 就好。
+4）工具栏点击 “生成->配置管理器”，或 “右键解决方案->配置管理器” 将带 uwp 和 wp8 的项目勾掉，不生成。
+5）生成解决方案
+
+4.要引用的头文件：
+pjsip目录下：
+	pjlib/include
+	pjlib-util/include
+	pjnath/include
+	pjmedia/include
+	pjsip/include
+都要复制过来，放到一个 include 下
+
+5.要包含的 lib 文件：
+只需要包含： “libpjproject” 文件即可，它包含了所有的库，如：
+	libpjproject-x86_64-x64-vc14-Debug.lib
+	libpjproject-x86_64-x64-vc14-Release.lib
+
+6.生成后调用：
+1）头文件引用：
+工具栏点击 项目->属性”，或 “右键解决方案->属性” ，选 “VC++目录->包含目录” 选择从 pjsip 中复制过来的头文件所在地址。
+
+2）包含静态库,有三种方式:
+查看文档 “在VS中添加lib库的三种方法”
+
+7.需要调用的系统库：
+	wsock32.lib
+	ws2_32.lib
+	ole32.lib
+	dsound.lib
+调用方法：项目->属性->链接器->输入->附加依赖项->编辑，复制进去
+
+8.注意：
+1）“属性->常规” 中，“字符集” 要和 pjsip 的设置对应
+2）“属性->C/C++” 中，“运行库” 要和 pjsip 的设置对应
+
+
+
