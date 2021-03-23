@@ -1,0 +1,15 @@
+QWidget的Native化及解决
+
+Widget变成Native窗口可能引起的问题
+
+在无边框可拖动的主界面标题栏鼠标事件被别的Native窗口接收，无法响应鼠标事件
+
+QLabel等基础布局都变成拥有句柄的window，在nativeEventFilter过滤事件时候需要考虑这些基础部件
+
+如何防止子部件Native化呢?
+
+QApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
+
+QApplication::setAttribute(Qt::AA_NativeWindows,false); //Qt::AA_NativeWindows受环境变量 QT_USE_NATIVE_WINDOWS控制，有可能环境变量被别的软件修改，所以也需要设置下
+
+在有widget调用winId的之前widget->setAttribute(Qt::WA_DontCreateNativeAncestors);

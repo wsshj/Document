@@ -1,0 +1,18 @@
+1. 在 .h 文件中重写事件：
+void keyPressEvent(QKeyEvent *event);
+
+2. 在 .cpp 文件中定义事件：
+void PlayerBar::keyPressEvent(QKeyEvent *event)
+{
+	if(event->key() == Qt::Key_Space)
+	{
+		return;
+	}
+}
+
+https://www.cnblogs.com/liming19680104/p/13729782.html
+中有更具体的使用方法
+
+复杂窗口中，可以试试在构造函数中添加这个函数，使其具有捕获键盘事件的能力：
+
+this->grabKeyboard();
