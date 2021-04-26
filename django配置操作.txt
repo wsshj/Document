@@ -20,16 +20,31 @@ projectName/wgsi,py 定义WSGI的接口信息，并用于与其他Web服务器�
 	pymysql.install_as_MySQLdb()
 
 6.修改 projectName/setting.py 中的 DATABASES：
+
+使用 pymysql 和 mysqlClient：
 	DATABASES = {
 	    'default': {
 	        'ENGINE': 'django.db.backends.mysql',  # 数据库驱动
 	        'NAME': 'electric_eye', # 库名
 	        'USER': 'root',			# 用户名
 	        'PASSWORD': '123456',	# 密码
-	        'HOST': '172.16.2.99',	# IP地址
+	        'HOST': '127.0.0.1',	# IP地址
 	        'PORT':'3306'			# 端口
 	    }
 	}
+
+使用 postgresql ：
+	DATABASES = {
+	    'default': {
+	        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        	'NAME': 'Kouot_System',
+			'USER': 'postgres',
+			'PASSWORD': '123456',
+			'HOST': '127.0.0.1',
+			'PORT':'5432',
+	    }
+	}
+
 连接数据库成功
 
 7.创建 projectName/views.py 文件，在当中写数据库操作及通信交互，具体写法参考项目
@@ -59,6 +74,43 @@ projectName/wgsi,py 定义WSGI的接口信息，并用于与其他Web服务器�
 python manage.py startapp appName(应用名)
  
 12.应用目录
+创建模型 projectName/django-admin startapp appName
+
+	生成目录结构：
+	projectName
+	|-- projectName
+	|-- manage.py
+	...
+	|-- appName
+	|   |-- __init__.py
+	|   |-- admin.py
+	|   |-- models.py
+	|   |-- tests.py
+	|   `-- views.py
+
+	在 appName/models.py 中添加模型：
+
+	class Test(models.Model):
+		name = models.CharField(max_length=20)
+
+	在 projectName/setting.py 中的 INSTALLED_APPS 内添加 appName：
+	INSTALLED_APPS = [
+		'django.contrib.admin',
+		'django.contrib.auth',
+		'django.contrib.contenttypes',
+		'django.contrib.sessions',
+		'django.contrib.messages',
+		'django.contrib.staticfiles',
+		'appName',
+	]
+
+	在命令行中运行：
+	$ python manage.py migrate   # 创建表结构
+	$ python manage.py makemigrations TestModel  # 让 Django 知道我们在我们的模型有一些变更
+	$ python manage.py migrate TestModel   # 创建表结构
+
+创建模型，数据表，并相关联
+
 admin.py 管理站点吗模块的声明文件，默认空
 
 apps.py 应用信息定义文件，在其中生成了类AppCongfig，该类用于定义应用名等Meta数据。

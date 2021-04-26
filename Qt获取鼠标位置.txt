@@ -1,0 +1,16 @@
+1、不点击鼠标就获取光标绝对位置的方法
+
+（1）QCursor().pos() 
+
+（2）cursor().pos()
+
+（3）int xPos = GET_X_LPARAM(param->lParam) - this->frameGeometry().x();
+         int yPos = GET_Y_LPARAM(param->lParam) - this->frameGeometry().y();
+
+上述三种方法获得的光标位置都是相对于屏幕的全局坐标，会受分辨率影响
+
+为了获得相对于当前窗口的位置，需要用到下面的方法
+
+2、将光标的绝对位置转化为窗口的相对坐标
+int x=this->mapFromGlobal(QCursor().pos()).x();
+int y=this->mapFromGlobal(QCursor().pos()).y();

@@ -1,0 +1,15 @@
+如果在 vscode 中编写 django 遇到编辑器报错，但其实代码没有问题的情况，是没有安装和配置好 pylint_django 的原因
+
+解决：
+1. pip install pylint_django
+
+2. 在vscode中点 file->preferences->settings
+
+3. 搜 Pylint Args， 找到 Python › Linting: Pylint Args 属性
+
+4. 点击add item
+
+5. 添加
+--load-plugins=pylint_django   //使用 pylint_django
+--django-settings-module=myproject(eg:Kouot_System_Server).settings   //配置 django
+--disable=C0111	//去除C0111的提示，这边主要是字符相关
