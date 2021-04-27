@@ -1,0 +1,6 @@
+客户端插件：
+1.进KBEmain，配置IP等，初始化事件
+2.登录操作 login ，如果没有连接服务器时，调 NetworkInterfaceBase 里的 connectTo ，连接成功进 onConnectTo_loginapp_login_callback 回调函数
+3.调用 hello 方法，发送客户端的版本号，脚本版本，执行 Client_onHelloCB 回调函数，其中返回服务端MD5验证码，如果和客户端插件MD5验证码相同，连接成功，再执行登录。
+4.执行登录 login_loginapp，已连接服务器，将用户名，密码序列化后发送，登录成功后调用 Client_onLoginSuccessfully 回调函数
+
