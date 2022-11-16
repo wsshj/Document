@@ -1,0 +1,13 @@
+1.下载
+https://developers.google.cn/protocol-buffers/
+
+如果需要源码编译，选择：
+protobuf-cpp-x.xx.x.zip
+
+如果直接使用，选择：
+protoc-xx.x-win64.zip
+
+2.使用
+直接用的话：
+解压后将目录下include中文件放入工程目录中，并将其包含
+将 bin 目录添加至环境变量，利用控制台输入 protoc 进行测试

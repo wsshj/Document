@@ -1,4 +1,4 @@
-1.安装 Django ，利用 pip install django==2.1.15 （这是较老的版本，最新的3.0，但是太新了，很多相关包不支持）
+1.安装 Django ，利用 pip install django 或者安装老版本pip install django==2.1.15（这是较老的版本，最新的3.0，但是太新了，很多相关包不支持）
 
 2.安装 pymysql 或 mysqlClient ，mysqlClient 是 Django 默认的数据库驱动，最新版本的 Django 对 pymysql 不支持，只能用 mysqlClient 作为数据库驱动
 

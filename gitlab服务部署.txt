@@ -1,0 +1,71 @@
+1.目前 gitlab 的服务要装在 Linux 上，如果想再 Windows 上起服务，要用到 Vmware 或者 Windows 自带的 WSL 工具
+
+2.WSL 工具安装配置比 Vmware 简单些，但是用的不熟练，我这边还是选择了 Vmware 装 Ubuntu
+
+3.安装配置过程：
+    (1)安装必要软件包
+        sudo apt update
+        sudo apt upgrade
+        sudo apt install build-essential curl file git ca-certificates
+
+    (2)添加GitLab的包并进行安装（在线安装）
+        curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh |sudo bash 
+        sudo apt-get install gitlab-ce 
+
+    (3)下载GitLab软件包并安装（下载好后，本地安装）
+        wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/bionic/gitlab-ce_14.1.2-ce.0_amd64.deb/download.deb
+        sudo dpkg -i gitlab-ce_14.1.2-ce.0_amd64.deb
+
+    网络可能不好，需要重试几次
+    PS：也可以直接下载安装包
+    下载安装包，访问链接： https://packages.gitlab.com/gitlab/gitlab-ce
+
+    (4)经过一段时间后，完成安装，出现 gitlab 的 logo. 执行以下操作，启动GitLab实例，打开浏览器看看效果，确保安装无误后开始配置
+        sudo gitlab-ctl reconfigure
+        sudo gitlab-ctl start
+        sudo gitlab-ctl status
+
+    (5)配置防火墙
+        sudo ufw allow https
+        sudo ufw allow http
+        sudo ufw allow ssh
+        sudo ufw enable
+        sudo ufw status
+
+    (6)查看GitLab默认root初始密码(尽快修改root密码)
+        sudo cat /etc/gitlab/initial_root_password
+
+    (7)GitLab项目域名或IP设置及修改
+    (7.1) 编辑gitlab.yml配置文件，修改host
+        sudo vim /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
+
+        1 ## GitLab settings
+        2   gitlab:
+        3     ## Web server settings (note: host is the FQDN, do not include http://)
+        4     host: 127.0.0.1
+        5     port: 80
+        6     https: false
+
+    (7.2) 编辑gitlab.rb文件，修改 external_url, external_url 的值会影响网页里克隆时的默认地址, 建议设成当前服务器的 IP 地址，这样别人 clone 更方便
+        sudo vim /etc/gitlab/gitlab.rb
+
+        1 ## Url on which GitLab will be reachable.
+        2 ## For more details on configuring external_url see:
+        3 ## https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/configuration.md#configuring-the-external-url-for-gitlab
+        4 external_url 'http://127.0.0.1'
+
+    (8)启动GitLab实例, 修改配置后要先 reconfigure 一下， 再 restart
+        sudo gitlab-ctl reconfigure
+        sudo gitlab-ctl restart
+
+    (9)设置GitLab开机自启
+        systemctl enable gitlab-runsvdir.service
+
+    (10)完成，然后就是把虚拟机的网络搞通就行了，在 Vmware Workstation -> 编辑 -> 虚拟网络编辑器 中设置
+
+参考：
+https://www.jianshu.com/p/6cd5eecd85db
+
+https://blog.csdn.net/nanerxue/article/details/119825292
+
+https://blog.csdn.net/u014380491/article/details/122410481
