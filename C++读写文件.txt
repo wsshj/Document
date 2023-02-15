@@ -1,0 +1,18 @@
+string readConfig(string strPath)
+{
+    ifstream fin;
+    fin.open(strPath, ios::in);
+    if (!fin.is_open())
+    {
+        cout << "无法找到这个文件！" << endl;
+        return nullptr;
+    }
+    string buff;
+    while (getline(fin, buff))
+    {
+        cout << buff << endl;
+    }
+    fin.close();
+
+    return buff;
+}

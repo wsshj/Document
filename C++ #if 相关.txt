@@ -1,0 +1,39 @@
+方式一：
+    表明如果标识符_XXXX已被#define命令定义过则对程序段1进行编译；否则对程序段2进行编译。注意：这种方式#ifdef后面只能跟一个宏变量。
+    #ifdef _XXXX
+        ...程序段1...
+    #else
+        ...程序段2...
+    #endif
+
+方式二：
+    与方式一相反。
+    #ifndef _XXXX
+        ...程序段1...
+    #else
+        ...程序段2...
+    #endif
+
+方式三：
+    这种方法可以将测试代码加进来。当需要开启测试的时候，只要将常量变1就好了。而不要测试的时候，只要将常量变0。
+    #if 常量 
+        ...程序段1...
+    #else
+        ...程序段2...
+    #endif 
+
+方式四：
+    方式四这种方法比较灵活，可以使用多个宏变量的组合（或||or与&&），推荐使用这种方法！
+    #if defined(Macro1) || defined(Macro2) && defined(Macro3)
+        ...程序段1...
+    #elif defined(Macro4)
+        ...程序段2...
+    #endif
+
+
+方式五：
+    #if !defined(Macro1) || defined(Macro2) || defined(Macro3)
+        ...程序段1...
+    #elif !defined(Macro4)
+        ...程序段2...
+    #endif
