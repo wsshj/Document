@@ -1,0 +1,10 @@
+double generateRandom()
+{
+    static default_random_engine e(time(0));        		// 生成无符号随机整数
+    static uniform_real_distribution<double> u(0, 1);	// 0 到 1 （包含）浮点数的均匀分布
+    static uniform_real_distribution<int> u(0, 99);		// 0 到 99 （包含）整数的均匀分布
+
+    return u(e);
+}
+
+注意：记得加 static
