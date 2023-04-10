@@ -1,0 +1,7 @@
+指令：F:/UE4/UE_4.21/Engine/Binaries/DotNET/UnrealBuildTool.exe -projectfiles -project="F:/UE4/YourProject/YourProject.uproject" -game -rocket -progress -2015
+
+UE生成工具文件： C:/UE4/UE_4.21/Engine/Binaries/DotNET/UnrealBuildTool.exe
+
+UE工程文件：F:/UE4/YourProject/YourProject.uproject
+
+VS版本：-2015

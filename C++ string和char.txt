@@ -1,0 +1,50 @@
+一、string转换为char*有3中方法：
+	1.data
+		string str="good boy";
+		const char *p=str.data();
+	2.c_str
+		string str="good boy";
+		const char *p=str.c_str();
+	3. copy
+		string str="good boy";
+		char p[20];
+		str.copy(p,5,0); //这里5，代表复制几个字符，0代表复制的位置
+		*(p+5)='\0'; //要手动加上结束符
+		或者:
+		string str="good boy";
+		char *p;
+		int len = str.length();
+		p=(char *)malloc((len+1)*sizeof(char));
+		str.copy(p,len,0);
+
+二、char*转换为string
+	char* s="good boy";
+	string str=s;
+	或者
+	char s[20]="good boy";
+	string str=s;
+
+三、string转换成char[]
+	string str = "good boy";
+	char p[20];
+	for(int i=0;i<str.length();i++)
+	p[i] = str[i];
+	p[str.length()] = '\0';
+	或者
+	string str="good boy";
+	char p[20];
+	str.copy(p,5,0); 
+	*(p+5)='\0'; 
+
+实例
+ 	string path = path_buff;
+    path = path + "\\sky.jpg";
+
+    int charlength = strlen(path.c_str()) + 1;
+    char* strc = new char[charlength];
+    strcpy_s(strc, charlength, path.c_str());
+    return strc;
+
+C 里面分配内存
+	char* p = (char*)malloc(256);
+	free(p)
