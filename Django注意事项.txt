@@ -1,0 +1,46 @@
+展示到前端页面
+    plan_queryset = PushCokePlan.objects.all()
+    return render(request,'book.html',locals())
+
+在django中获取post数据，首先要规定post发送的数据类型是什么。
+
+1.获取POST中表单键值数据:
+    如果要在django的POST方法中获取表单数据，则在客户端使用JavaScript发送POST数据前，定义post请求头中的请求数据类型：
+
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+    在django的views.py相关方法中，需要通过request.POST获取表单的键值数据，并且可以通过reques.body获取整个表单数据的字符串内容
+
+    if(request.method == 'POST'):
+        print("the POST method")
+        concat = request.POST
+        postBody = request.body
+        print(concat)
+        print(type(postBody))
+        print(postBody)
+
+    # 以form表单的方式传参，接收处理方法
+    # date = request.POST.get("date", default='')
+    # plans = request.POST.get("plans", default='')
+
+2.获取POST中json格式的数据:
+    如果要在django的POST方法中获取json格式的数据，则需要在post请求头中设置请求数据类型：
+
+    xmlhttp.setRequestHeader("Content-type","application/json");
+
+    在django的views.py中导入python的json模块(import json)，然后在方法中使用request.body获取json字符串形式的内容，使用json.loads()加载数据。
+    
+    if(request.method == 'POST'):
+        print("the POST method")
+        concat = request.POST
+        postBody = request.body
+        print(concat)
+        print(type(postBody))
+        print(postBody)
+        json_result = json.loads(postBody)
+        print(json_result)
+
+    # 以json的方式传参，接收处理方法
+    # date = json.loads(request.body).get("date", '')
+    # plans = json.loads(request.body).get("plans", '')
+

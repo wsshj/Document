@@ -1,0 +1,13 @@
+1. 插入单条数据
+    plan = PushCokePlan(name=response['name'])
+    plan.save()
+
+2. 插入多条数据
+    for plan in json.loads(plans):
+        plan_obj = PushCokePlan(stove_num = plan['stove_num'], type_id = plan['type_id'], pushing_time = plan['pushing_time'], 
+                                coking_time = plan['coking_time'], date = date)
+
+        plan_list.append(plan_obj)
+
+    # 调用了orm的bulk_create方法,多条数据同时插入
+    PushCokePlan.objects.bulk_create(plan_list)  
