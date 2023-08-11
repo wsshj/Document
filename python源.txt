@@ -1,9 +1,27 @@
-默认情况下 pip 使用的是国外的镜像，在下载的时候速度非常慢，本文我们介绍使用国内清华大学的源，地址为：
+阿里云：https://mirrors.aliyun.com/pypi/simple/
 
-https://pypi.tuna.tsinghua.edu.cn/simple
-我们可以直接在 pip 命令中使用 -i 参数来指定镜像地址，例如：
+清华大学：https://pypi.tuna.tsinghua.edu.cn/simple/
 
-pip install package -i https://pypi.tuna.tsinghua.edu.cn/simple
+中国科技大学：https://pypi.mirrors.ustc.edu.cn/simple/
 
-pip install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
-以上命令使用清华镜像源安装 numpy 包。
+豆瓣：https://pypi.douban.com/simple/
+
+
+使用清华源的方法：
+
+1.临时使用
+	pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+
+	例如：
+		pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy
+	以上命令使用清华镜像源安装 numpy 包。
+
+2.设为默认
+	升级 pip 到最新的版本 (>=10.0.0) 后进行配置：
+
+	python -m pip install --upgrade pip 
+	pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple  
+
+注意：
+如果您到 pip 默认源的网络连接较差，临时使用本镜像站来升级 pip：
+	python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip

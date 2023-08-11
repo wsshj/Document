@@ -1,0 +1,32 @@
+#include "stdio.h"
+#include "string.h"
+
+typedef struct
+{
+    int value1;
+    int value2;
+    int value3;
+    int value4;
+    int value5;
+}CJJJS;
+
+void main()
+{
+    CJJJS cjjjs;
+
+    int * pInt=0;
+
+    int arr[5]={0,12,14,42,45};
+
+    for (int i=0;i<sizeof(CJJJS)/sizeof(int);i++)
+    {
+        pInt = ((int*)((char*)&cjjjs + i*sizeof(int)));
+        *pInt=arr[i];
+    }
+
+    for(int i=0;i<sizeof(CJJJS)/sizeof(int);i++)
+    {
+        pInt = ((int*)((char*)&cjjjs + i*sizeof(int)));
+        printf("%d  %d\n",i,*pInt);
+    }
+}
