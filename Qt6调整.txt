@@ -1,0 +1,4 @@
+Qt6中 
+	import QtGraphicalEffects 1.15 
+替换为  
+	import Qt5Compat.GraphicalEffects
