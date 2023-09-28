@@ -1,0 +1,92 @@
+QByteArray有提供toInt()函数将 QbyteArray中的数据转为int类型。文章中涉及到的int类型都是4个字节。
+
+
+一、QByteArray保存的是字符串，直接调用 toInt() 就可以了。需要注意的是不能超出int类型的大小范围，不然会转换失败。
+
+1.保存的是十进制的数：
+bool ok;
+QByteArray arr("12345");
+qDebug() << arr.toInt(&ok, 10);
+
+QByteArray arr1("-12345");
+qDebug() << arr1.toInt(&ok, 10);
+
+
+2.保存的是十六进制的数：
+bool ok;
+QByteArray arr("ABCDEF");
+qDebug() << arr.toInt(&ok, 16);
+
+
+二、QByteArray保存的是数，需要先调用toHex() 再调用 toInt()，这种方法也不能超出int范围。但是这种方法只能正确转换16进制的数。
+bool ok;
+QByteArray arr;
+arr[0] = 0xAB;
+arr[1] = 0xCD;
+arr[2] = 0xEF;
+qDebug() << arr.toHex().toInt(&ok, 16);
+
+
+三、自定义方法
+
+enum Endian
+{
+	LittileEndian,
+	BigEndian
+};
+
+int byteAraryToInt(QByteArray arr,  Endian endian = BigEndian)
+{
+	if (arr.size() < 4) 
+		return 0;
+
+	int res = 0;
+
+	// 小端模式
+	if (endian == LittileEndian)
+	{
+		res = arr.at(0) & 0x000000FF;
+		res |= (arr.at(1) << 8) & 0x0000FF00;
+		res |= (arr.at(2) << 16) & 0x00FF0000;
+		res |= (arr.at(3) << 24) & 0xFF000000;
+	}
+
+	// 大端模式
+	else if (endian == BigEndian)
+	{
+		res = (arr.at(0) << 24) & 0xFF000000;
+		res |= (arr.at(1) << 16) & 0x00FF0000;
+		res |= arr.at(2) << 8 & 0x0000FF00;
+		res |= arr.at(3) & 0x000000FF;
+	}
+	return res;
+}
+
+不同数据类型，通用函数
+
+template<class T>
+T endianSwitch(QByteArray arr, Endian endian)
+{
+    if (arr.size() != sizeof(T))
+        return 0;
+
+    int res = 0;
+
+    T t = 0xFF;
+    if (endian == LittileEndian) // 转小端
+    {
+        for(int i = 0; i < (int)sizeof(T); i++)
+        {
+            res |= (arr.at(i) << (8*i)) & (t << (8*i));
+        }
+    }
+    else if (endian == BigEndian) // 转大端
+    {
+        for(int i = 0; i < (int)sizeof(T); i++)
+        {
+            res |= (arr.at(i) << (8 * ((int)sizeof(T) - 1 - i))) & (t << (8 * ((int)sizeof(T) - 1 - i)));
+        }
+    }
+
+    return res;
+}
