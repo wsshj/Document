@@ -1,0 +1,7 @@
+原因：
+在debug模式（开发模式）下Django会开启两个线程，另一个用来监听代码变化（比如说Ctrl+S会自动重启）
+
+解决：
+如果不想让它启动执行两次，可以在启动命令加上“–noreload”
+
+python manage.py runserver 8000 --noreload
