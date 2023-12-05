@@ -12,6 +12,7 @@ q 快速收藏夹（添加常用操作）
 shift + a 添加
 shift + d 复制
 shift + s 吸附
+
 ctrl + 1，2，3 细分平面等级
 alt + d 关联复制
 ctrl + f 动画帧列表

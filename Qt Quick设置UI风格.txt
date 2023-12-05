@@ -1,0 +1,27 @@
+参考文档 QQuickStyle Class
+
+添加头文件：
+Header:  #include <QQuickStyle>
+
+添加库：
+CMake: 	find_package(Qt6 REQUIRED COMPONENTS QuickControls2) 
+	target_link_libraries(mytarget PRIVATE Qt6::QuickControls2)
+
+qmake: QT += quickcontrols2
+
+示例：
+ #include <QGuiApplication>
+ #include <QQmlApplicationEngine>
+ #include <QQuickStyle>
+
+ int main(int argc, char *argv[])
+ {
+     QGuiApplication app(argc, argv);
+
+     QQuickStyle::setStyle("Material");
+
+     QQmlApplicationEngine engine;
+     engine.load(QUrl("qrc:/main.qml"));
+
+     return app.exec();
+ }

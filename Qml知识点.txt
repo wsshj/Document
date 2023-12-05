@@ -1,0 +1,45 @@
+ QML 零散的知识点
+
+ 灵活运用 Alt + Enter
+
+1. 在Qml中
+"=" 意为赋值，赋值关系相当于一次性的关联关系
+":" 意为绑定，绑定关系相当与存在长期的关联关系，属性会随变量的更改而更改
+直接对变量的赋值行为会打破绑定关系
+
+2. Qt6 可以不写版本号，会默认调用最高版本
+
+3. 图片的填充方式设置
+Image{
+    fillMode: Image.Stretch  // 图片的填充方式设置，具体内容参考文档
+}
+
+4. 鼠标事件的下穿，当两个 MouseArea 区域重叠时（ MouseArea 和别的控件重叠时不好用），实现上层 MouseArea 操作下穿，透过上层的 MouseArea 实现对下层 MouseArea 的操作
+MouseArea {
+    id: chartseries_mouseArea
+
+    anchors.fill: parent
+
+    hoverEnabled: true
+
+    propagateComposedEvents: true
+
+    onClicked: (mouse)=> {
+        console.log("clicked blue")
+        mouse.accepted = false
+    }
+
+    onPositionChanged: function(mouse) {
+        console.log("mouseX:", mouseX)
+        console.log("mouseY:", mouseY)
+    }
+
+    onPressed: function(mouse) {
+        mouse.accpted = false
+    }
+
+    onReleased: function(mouse) {
+        console.log("onReleased")
+        mouse.accepted = false
+    }
+}
