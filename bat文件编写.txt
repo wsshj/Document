@@ -1,0 +1,26 @@
+::关闭回显
+@echo off
+
+::防止中文乱码
+chcp 65001  
+
+::显示当前磁盘路径命令行
+cd /d LJQ_Sim_Server_1.1_Beta
+taskkill /f /t /im JH205LJQ_PLCServer_only_one.exe
+start JH205LJQ_PLCServer_only_one.exe
+
+cd /d ../nginx
+call shutdown.bat
+start nginx.exe
+
+cd /d ../JH205LJQ_Web_Server
+call runServer.bat
+
+cd /d ..
+start JH205LJQ.exe
+
+:: call是在当前控制台运行应用
+
+:: start是开一个新的控制台，新进程运行应用
+
+:: 根据实际需求选择打开方式，一般要是利用bat开多个应用，还是要使用 start

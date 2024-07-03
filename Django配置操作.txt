@@ -67,6 +67,17 @@ projectName/wgsi,py 定义WSGI的接口信息，并用于与其他Web服务器�
 	    'django.contrib.messages.middleware.MessageMiddleware',
 	    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	]
+	注：如果不注释掉该功能，直接请求的话，程序会报CSRF cookie not set.错误，以下是详细的解释
+
+	什么是 CSRF
+	CSRF, Cross Site Request Forgery, 跨站点伪造请求。举例来讲，某个恶意的网站上有一个指向你的网站的链接，如果某个用户已经登录到你的网站上了，那么当这个用户点击这个恶意网站上的那个链接时，就会向你的网站发来一个请求，你的网站会以为这个请求是用户自己发来的，其实呢，这个请求是那个恶意网站伪造的。
+
+	csrf原理
+	csrf要求发送post,put或delete请求的时候，是先以get方式发送请求，服务端响应时会分配一个随机字符串给客户端，客户端第二次发送post,put或delete请求时携带上次分配的随机字符串到服务端进行校验
+
+	这是因为在post请求时，我们没有加CsrfToken字段，而在Django项目中，这字段相当于提交数据的令牌，是必须的。如果在开发阶段可以直接把它注释掉，这样就不会报错。
+
+	如果项目完成之后，需要开启这个中间件
 
 10.cmd 中执行 python manage.py runserver 0.0.0.0:8000 开启服务
 
